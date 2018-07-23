@@ -2,6 +2,7 @@ import React, { Component }  from 'react'
 import {fetchAllPosts} from "../actions/actions"
 import {connect} from "react-redux"
 import Post from './post'
+import Comment from './comment' 
 
 
 class Posts extends Component {
@@ -9,9 +10,7 @@ class Posts extends Component {
     componentDidMount() {        
        this.props.dispatch(fetchAllPosts())
     }
-    componentWillUnmount() {        
-        console.log(this.props.posts)
-     }
+  
  
     render() {
         
@@ -22,6 +21,12 @@ class Posts extends Component {
                   <Post key={post.id} post={post}  />
               ))}
             </div>
+            <div>
+              {this.props.comments.map(comment => (
+                    <Comment key={comment.id} comment={comment}  />
+              ))}
+
+          </div>
             </div>
 
         )
@@ -32,7 +37,9 @@ class Posts extends Component {
 function mapStateToProps(state) {
     return {
         posts: state.posts,
-        state: state
+        state: state,
+        comments: state.comments
+
     }
 }
 

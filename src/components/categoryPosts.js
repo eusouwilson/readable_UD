@@ -6,12 +6,15 @@ import Post from './post'
 
 class CategoryPosts extends Component {
 
-    componentDidMount() {        
+    componentDidMount() { 
+    //const mapDispatchToProps = this.props.dispatch(fetchPostCategory(this.props.match.params.category))
+
        this.props.dispatch(fetchPostCategory(this.props.match.params.category))
        console.log(this.props.match.params.category)
        console.log(this.props)
 
     }
+
 
     render() {
         return(
@@ -21,7 +24,6 @@ class CategoryPosts extends Component {
                   <Post key={post.id} post={post}  />
               ))}
             </div>
-            <h1>test</h1>
             </div>
 
         )
@@ -29,11 +31,12 @@ class CategoryPosts extends Component {
     
 }
 
-function mapStateToProps(state) {
+function mapDispatchToProps(state) {
     return {
         posts: state.posts,
         state: state
     }
 }
 
-export default connect(mapStateToProps)(CategoryPosts);
+  
+export default connect(mapDispatchToProps)(CategoryPosts);
