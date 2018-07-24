@@ -2,7 +2,8 @@ import {
     GET_POSTS,
     GET_POST,
     GET_CATEGORY,
-    GET_POST_CATEGORY
+    GET_POST_CATEGORY,
+    GET_COMMENTS
 } from "../actions/actions";
 
 const initialPostState = {
@@ -37,7 +38,7 @@ function posts(state = initialPostState, action) {
             }
             return {
                 ...state,
-                post: action.post,
+                posts: action.posts,
                 comments: state.comments,
                 error: error
             }
@@ -46,6 +47,12 @@ function posts(state = initialPostState, action) {
                 ...state,
                 categories: action.categories
             }
+        case GET_COMMENTS:
+            return {
+                ...state,
+                post: state.post,
+                comments: action.comments
+            }    
         default:
             return state
     }

@@ -2,7 +2,6 @@ import React, { Component }  from 'react'
 import {fetchAllPosts} from "../actions/actions"
 import {connect} from "react-redux"
 import Post from './post'
-import Comment from './comment' 
 
 
 class Posts extends Component {
@@ -21,12 +20,6 @@ class Posts extends Component {
                   <Post key={post.id} post={post}  />
               ))}
             </div>
-            <div>
-              {this.props.comments.map(comment => (
-                    <Comment key={comment.id} comment={comment}  />
-              ))}
-
-          </div>
             </div>
 
         )

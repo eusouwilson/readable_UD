@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import { timeStampToString} from '../utils/utils';
 
 class Post extends Component {
+
     render() {
         return(  
          <div className="col-md-6" key={this.props.post.id}>
@@ -48,12 +49,11 @@ class Post extends Component {
 
                       </div>
                       <div className="col-md-6"> <b>Author:</b> @{this.props.post.author} - <b>Comments:</b> {this.props.post.commentCount} -  <span> <b>Date: </b>{timeStampToString(this.props.post.timestamp)}</span></div>
-                     
-
                   </div>
               </div>
           </div>
           </div>
+          
       )
         
     }; 
