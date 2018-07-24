@@ -38,7 +38,7 @@ function posts(state = initialPostState, action) {
             }
             return {
                 ...state,
-                posts: action.posts,
+                post: action.post,
                 comments: state.comments,
                 error: error
             }

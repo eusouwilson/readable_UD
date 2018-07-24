@@ -22,16 +22,16 @@ class PostDetail extends Component {
                 <div className="row">
                 <Post key={this.props.post.id} post={this.props.post}  />
                 </div>
-                <div className="row">
-                    <div className="col-md-6">
-                    <div className="bs-callout bs-callout-info">
-                    <h4>{this.props.post.commentCount} - COMMENTS</h4>
-                        {this.props.comments.map(comment => (
-                        <Comment key={comment.id} comment={comment}  />
-                        ))}
-                    </div>
-                    </div>
-                </div>
+                {this.props.post.commentCount > 0 && 
+                   <div className="row">
+                   <div className="comment-body comment-body-info">
+                   {this.props.comments.map(comment => (
+                    <Comment key={comment.id} comment={comment} />
+                   ))}
+               </div>       
+               </div>
+                }   
+             
             </div>
     
         )

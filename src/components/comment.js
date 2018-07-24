@@ -4,7 +4,7 @@ class Comment extends Component {
     render() {
         return(
         <div key={this.props.comment.id}>
-            <img src='https://www.fakenamegenerator.com/images/sil-male.png' alt="..." className="usuario-avatar img-circle"/>
+            <img src='https://www.fakenamegenerator.com/images/sil-male.png' alt="autor" className="usuario-avatar img-circle"/>
             <autor>&nbsp;{this.props.comment.author}</autor>
              <div className="texto-comentario" >{this.props.comment.body}</div>
              <button type="button" className="btn btn-default" aria-label="Like">

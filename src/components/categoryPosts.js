@@ -9,7 +9,7 @@ class CategoryPosts extends Component {
     componentDidMount() { 
     //const mapDispatchToProps = this.props.dispatch(fetchPostCategory(this.props.match.params.category))
 
-       this.props.dispatch(fetchPostCategory(this.props.match.params.category))
+      this.props.dispatch(fetchPostCategory(this.props.match.params.category))
        console.log(this.props.match.params.category)
        console.log(this.props)
 
@@ -31,12 +31,12 @@ class CategoryPosts extends Component {
     
 }
 
-function mapDispatchToProps(state) {
+function mapStateToProps(state) {
     return {
-        posts: state.posts,
+        posts: state.post,
         state: state
     }
 }
 
   
-export default connect(mapDispatchToProps)(CategoryPosts);
+export default connect(mapStateToProps)(CategoryPosts);

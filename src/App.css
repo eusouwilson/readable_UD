@@ -36,58 +36,64 @@
 font-size: 40px;
 }
 
-.bs-callout {
+.comment-body {
   padding: 20px;
-  margin: 20px 0;
+  margin: 0px 0px 0px 140px ;
   border: 1px solid #eee;
   border-left-width: 5px;
   border-radius: 3px;
+  width: 70%;
+
 }
-.bs-callout h4 {
+.comment-body h4 {
   margin-top: 0;
   margin-bottom: 5px;
 }
-.bs-callout h3 {
-  margin-top: 0;
-  margin-bottom: 5px;
-}
 
-.bs-callout p:last-child {
-  margin-bottom: 0;
-}
-.bs-callout code {
-  border-radius: 3px;
-}
-
-/* Tighten up space between multiple callouts */
-.bs-callout + .bs-callout {
-  margin-top: -5px;
-}
-
-/* Variations */
-.bs-callout-danger {
-  border-left-color: #ce4844;
-}
-.bs-callout-danger h4 {
-  color: #ce4844;
-}
-.bs-callout-warning {
-  border-left-color: #aa6708;
-}
-.bs-callout-warning h4 {
-  color: #aa6708;
-}
-.bs-callout-info {
+.comment-body-info {
   border-left-color: #1b809e;
 }
-.bs-callout-info h4 {
+.comment-body-info h4 {
   color: #1b809e;
 }
-.bs-callout-info autor {
+.comment-body-info autor {
   color: #1b809e;
   font-size: 20px;
 
 }
+
+.mc-body {
+  max-width: 1600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.head_title {
+  font-size: 4rem;
+  text-align: center;
+  margin-top: 30px;
+  letter-spacing: -.065em;
+  margin-bottom: 12px;
+  color: #222
+}
+.data_category {
+  color: #999;
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: -.02rem;
+  margin: 0px 0px 20px 140px;
+}
+.text-container {
+margin: 0px 0px 20px 140px;
+padding: 0;
+font-size: 1.4em;
+vertical-align: baseline;
+text-align: justify;
+width: 70%;
+color: #666;
+text-overflow: ellipsis; 
+}
+
 .usuario-avatar {
   width: 32px;
   height: 32px;

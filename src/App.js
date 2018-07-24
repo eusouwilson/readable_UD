@@ -24,11 +24,7 @@ class App extends Component {
               <Route exact path="/categories" component={Categories}></Route>
               <Route path="/:posts/:id" component={postDetail}></Route>
               <Route exact path="/:category" component={CategoryPosts}></Route>
-
-
-
           </Switch>          
-          <About/>
       </div>
       </BrowserRouter>
 
