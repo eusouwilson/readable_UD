@@ -8,7 +8,7 @@ import postDetail from './components/postDetail';
 import Menu from './templates/menu';
 import CategoryPosts from './components/categoryPosts';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
-
+import PostComment from './components/addComment'
 class App extends Component {
 
   render() {
@@ -19,7 +19,7 @@ class App extends Component {
           <Switch>
               <Route exact path="/" component={Posts}></Route>
               <Route exact path="/posts" component={Posts}></Route>
-              <Route exact path="/categories" component={Categories}></Route>
+              <Route exact path="/addComments" component={PostComment}></Route>
               <Route path="/:posts/:id" component={postDetail}></Route>
               <Route exact path="/:category" component={CategoryPosts}></Route>
           </Switch>          

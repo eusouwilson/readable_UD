@@ -11,23 +11,18 @@ class Categories extends Component {
  
     render() {
         return(
-            <div className="container">
-                <div className="jumbotron"> 
                     <ul className="list-group">
                     <h2>Categories</h2>
                     {this.props.categories.map((category) => {
                         return <li className="list-group-item" key={category.path}>
                         <Link to={{
-                                pathname: `/${category.path}`,
-                                state: {fromCategory :true}
+                                pathname: `/${category.path}`
                             }}>
                         {category.name}
                         </Link>
                         </li>
                     })}
                     </ul>
-                </div>
-            </div>
         )
         
     }; 

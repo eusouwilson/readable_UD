@@ -12,15 +12,15 @@ export const fetchAllPosts = () => dispatch => {
 }
 
 export const GET_POST = 'GET_POST'
-export function getPost(post, comments) {
+export function getPost(posts, comments) {
     return {
         type: GET_POST,
-        post,
+        posts,
         comments
     }
 }
 export const fetchPost = (id) => dispatch => {
-    postAPI.getArticleById(id).then((post) => dispatch(getPost(post)))
+    postAPI.getArticleById(id).then((posts) => dispatch(getPost(posts)))
 }
 
 export const ADD_COMMENT = 'ADD_COMMENT'
@@ -48,14 +48,14 @@ export const fetchAllCategories = () => dispatch => {
 
 //post por categorias
 export const GET_POST_CATEGORY = 'GET_POST_CATEGORY'
-export function getPostCategory(post) {
+export function getPostCategory(posts) {
     return {
         type: GET_POST_CATEGORY,
-        post
+        posts
         }
 }
 export const fetchPostCategory = (category) => dispatch => {
-    postAPI.getAllByCategories(category).then((post) => dispatch(getPostCategory(post)))
+    postAPI.getAllByCategories(category).then((posts) => dispatch(getPostCategory(posts)))
 }
 
 
@@ -72,14 +72,14 @@ export const fetchAllComments = (id) => dispatch => {
 }
 
 export const VOTE_POST = 'VOTE_POST'
-export function votePost(post) {
+export function votePost(posts) {
     return {
         type: VOTE_POST,
-        post
+        posts
     }
 }
 export const fetchVotePost = (id, data) => dispatch => {
-    postAPI.votePost(id, data).then((post) => dispatch(votePost(post)))
+    postAPI.votePost(id, data).then((posts) => dispatch(votePost(posts)))
 }
 
 export const VOTE_COMMENT = 'VOTE_COMMENT'

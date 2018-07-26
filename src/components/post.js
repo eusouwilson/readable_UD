@@ -4,7 +4,7 @@ import { timeStampToString} from '../utils/utils';
 import {fetchVotePost} from '../actions/actions'
 import '../App.css';
 import {connect} from "react-redux";
-
+import PostComment from "./addComment"
 class Post extends Component {
 
     render() {
@@ -42,7 +42,8 @@ class Post extends Component {
                 <span className="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
             </button> 
             <h4>{this.props.post.commentCount} - COMMENTS</h4>
-            <hr/>  
+            <PostComment post={this.props.post} /> 
+            <hr/> 
             </div>
             
         </div>
@@ -54,7 +55,7 @@ class Post extends Component {
 function mapStateToProps(state) {
 
     return {
-        posts: state.post,
+        posts: state.posts,
         state: state
     }
 }

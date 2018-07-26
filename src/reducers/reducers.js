@@ -26,22 +26,22 @@ function posts(state = initialPostState, action) {
             }
         case GET_POST:
             let error = ""
-            if(action.post.error || JSON.stringify(action.post)==='{}') {
+            if(action.posts.error || JSON.stringify(action.posts)==='{}') {
                 error = true
             }
             return {
                 ...state,
-                post: action.post,
+                posts: action.posts,
                 comments: state.comments,
                 error: error
             }
         case GET_POST_CATEGORY:
-            if(action.post.error || JSON.stringify(action.post)==='{}') {
+            if(action.posts.error || JSON.stringify(action.posts)==='{}') {
                 error = true
             }
             return {
                 ...state,
-                post: action.post,
+                posts: action.posts,
                 comments: state.comments,
                 error: error
             }
@@ -54,16 +54,16 @@ function posts(state = initialPostState, action) {
         case GET_COMMENTS:
             return {
                 ...state,
-                post: state.post,
+                posts: state.posts,
                 comments: action.comments
             }
         
         case VOTE_POST:
             temp = Object.entries(state)[0][1]
-            temp.map((post) => post.id === action.post.id ? post.voteScore = action.post.voteScore : "")
+            temp.map((posts) => posts.id === action.posts.id ? posts.voteScore = action.posts.voteScore : "")
             return {
                 ...state,
-                post: temp
+                posts: temp
             }
         case VOTE_COMMENT:
             temp = state.comments
