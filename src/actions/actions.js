@@ -70,3 +70,26 @@ export function getComments(comments) {
 export const fetchAllComments = (id) => dispatch => {
     postAPI.getCommentsById(id).then((comments) => dispatch(getComments(comments)))
 }
+
+export const VOTE_POST = 'VOTE_POST'
+export function votePost(post) {
+    return {
+        type: VOTE_POST,
+        post
+    }
+}
+export const fetchVotePost = (id, data) => dispatch => {
+    postAPI.votePost(id, data).then((post) => dispatch(votePost(post)))
+}
+
+export const VOTE_COMMENT = 'VOTE_COMMENT'
+export function voteComment(comment) {
+    return {
+        type: VOTE_COMMENT,
+        comment
+    }
+}
+export const fetchVoteComment = (id, data) => dispatch => {
+
+    postAPI.voteComment(id, data).then((comment) => dispatch(voteComment(comment)))
+}

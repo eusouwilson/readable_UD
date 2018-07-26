@@ -1,7 +1,10 @@
 import React, { Component }  from 'react'
 import {Link} from 'react-router-dom'
 import { timeStampToString} from '../utils/utils';
+import {fetchVotePost} from '../actions/actions'
 import '../App.css';
+import {connect} from "react-redux";
+
 class Post extends Component {
 
     render() {
@@ -25,13 +28,17 @@ class Post extends Component {
             <div className="text-container">
             <p>{this.props.post.body}</p>
 
-            <button type="button" className="btn btn-default" aria-label="Like">
+            <button type="button" className="btn btn-default" aria-label="Like" onClick={() => (
+                this.props.dispatch(fetchVotePost(this.props.post.id, {option: "upVote"}))
+            )}>
                 <span className="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
             </button> 
             <button className="btn btn-default" type="button" disabled="disabled">
             Score {this.props.post.voteScore}
             </button>                        
-            <button type="button" className="btn btn-default" aria-label="DisLike">
+            <button type="button" className="btn btn-default" aria-label="DisLike" onClick={() => (
+                this.props.dispatch(fetchVotePost(this.props.post.id, {option: "downVote"}))
+            )}>
                 <span className="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
             </button> 
             <h4>{this.props.post.commentCount} - COMMENTS</h4>
@@ -43,4 +50,14 @@ class Post extends Component {
       )                        
     }; 
 }
-export default Post;
+
+function mapStateToProps(state) {
+
+    return {
+        posts: state.post,
+        state: state
+    }
+}
+
+
+export default connect(mapStateToProps)(Post);

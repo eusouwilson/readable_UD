@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'; 
 import '../node_modules/font-awesome/css/font-awesome.min.css';
-//import Main from './components/routers';
 import Posts from './components/posts';
 import Categories from './components/categories';
 import postDetail from './components/postDetail';
-import About from './components/about';
 import Menu from './templates/menu';
 import CategoryPosts from './components/categoryPosts';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'

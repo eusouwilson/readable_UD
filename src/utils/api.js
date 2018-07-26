@@ -41,6 +41,26 @@ export const getAllByCategories = (category) =>
     fetch(`${api}/${category}/posts`, {headers})
         .then(res => res.json())
         .then(data => data)
-      
+        
+export const votePost = (id, bodyContent) =>
+    fetch(`${api}/posts/${id}`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bodyContent)
+    }).then(res => res.json())
+    
+export const voteComment = (id, bodyContent) =>
+    fetch(`${api}/comments/${id}`, {
+        method: 'POST',
+        headers: {
+            ...headers,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bodyContent)
+    }).then(res => res.json())
+        .then(data => data)
   
   
