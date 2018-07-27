@@ -104,9 +104,10 @@ font-size: 40px;
   box-sizing: border-box;
   float: right;
   margin-top: 10px
-
 }
-
+.form-horizontal {
+margin-left: 20%
+}
 .mc-body {
   max-width: 1600px;
   margin-left: auto;

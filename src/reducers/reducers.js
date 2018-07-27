@@ -5,7 +5,9 @@ import {
     GET_POST_CATEGORY,
     GET_COMMENTS,
     VOTE_POST,
-    VOTE_COMMENT
+    VOTE_COMMENT,
+    ADD_POST,
+
 } from "../actions/actions";
 
 const initialPostState = {
@@ -72,7 +74,12 @@ function posts(state = initialPostState, action) {
                 ...state,
                 comments: temp
 
-            }        
+            }
+        case ADD_POST:
+            state.posts.push(action.posts)
+            return {
+                ...state,
+            }            
         default:
             return state
     }

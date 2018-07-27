@@ -90,6 +90,16 @@ export function voteComment(comment) {
     }
 }
 export const fetchVoteComment = (id, data) => dispatch => {
-
     postAPI.voteComment(id, data).then((comment) => dispatch(voteComment(comment)))
+}
+
+export const ADD_POST = 'ADD_POST'
+export function addPost(posts) {
+    return {
+        type: ADD_POST,
+        posts,
+    }
+}
+export const fetchAddPost = (body) => dispatch => {
+    postAPI.addPost(body).then((posts) => dispatch(addPost(posts)))
 }

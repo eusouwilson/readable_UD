@@ -9,9 +9,14 @@ class CategoryPosts extends Component {
 
     componentDidMount() { 
      this.props.dispatch(fetchPostCategory(this.props.match.params.category))
-     console.log(this.props.match)
-    }
+     console.log(this.props)
 
+    } 
+    componentDidUpdate(prevProps) {
+         if (this.props.match.params.category !== prevProps.match.params.category) {
+             this.props.dispatch(fetchPostCategory(this.props.match.params.category))
+        }
+      } 
 
     render() {
         return(
