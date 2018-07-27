@@ -16,7 +16,7 @@ class AddPost  extends Component {
     addPost = () => {
         var index = ReactDOM.findDOMNode(this.refs.select).selectedIndex
         var category = ReactDOM.findDOMNode(this.refs.select).options[index].innerHTML
-        this.props.dispatch(fetchAddPost({
+       this.props.dispatch(fetchAddPost({
             id: getUid(24, 16),
             timestamp: Date.now(),
             body: this.body,
@@ -24,11 +24,13 @@ class AddPost  extends Component {
             title: this.title,
             category: category
 
-        })) 
+        }))
+        console.log(getUid(24, 16))
+
     }
     render() {
         return(
-            <form className="col-md-6 form-horizontal">
+            <form className="col-md-6 form-horizontal"  onSubmit={this.addPost}>
             <fieldset>
                 <legend>Post a new article</legend>
                 <div className="form-group ">
@@ -61,7 +63,7 @@ class AddPost  extends Component {
                     </select>
                     <span className="form-caret"></span>
                 </div>
-                <button className="botaoEnviar" type="butom"  onClick={this.addPost}>send</button>
+                <button className="botaoEnviar" type="sumit" >send</button>
             </fieldset>
         </form>
         )
