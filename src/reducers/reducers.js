@@ -6,7 +6,10 @@ import {
     GET_COMMENTS,
     VOTE_POST,
     VOTE_COMMENT,
+    DELETE_COMMENT,
     ADD_POST,
+    EDIT_POST,
+    DELETE_POST
 
 } from "../actions/actions";
 
@@ -59,7 +62,15 @@ function posts(state = initialPostState, action) {
                 posts: state.posts,
                 comments: action.comments
             }
-        
+        case DELETE_COMMENT:
+            for (var i = state.comments.length - 1; i >= 0; i--) {
+                if (state.comments[i].id === action.comment.id) {
+                    state.comments.splice(i, 1)
+                }
+            }
+            return {
+                ...state
+            }
         case VOTE_POST:
             temp = Object.entries(state)[0][1]
             temp.map((posts) => posts.id === action.posts.id ? posts.voteScore = action.posts.voteScore : "")
@@ -77,9 +88,29 @@ function posts(state = initialPostState, action) {
             }
         case ADD_POST:
             state.posts.push(action.posts)
+            console.log(...state)
             return {
                 ...state,
+                
             }            
+        case EDIT_POST:
+            temp = Object.entries(state)[0][1]
+            temp.map((post) => post.id === action.post.id ? post.voteScore = action.post.voteScore : "")
+            
+            return {
+                ...state,
+                posts: temp
+
+            }
+        case DELETE_POST:
+            for (let i = state.posts.length - 1; i >= 0; i--) {
+                if (state.posts[i].id === action.posts.id) {
+                    state.posts.splice(i, 1)
+                }
+            }
+            return {
+                ...state
+            }    
         default:
             return state
     }

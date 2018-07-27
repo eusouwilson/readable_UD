@@ -30,7 +30,7 @@ class AddPost  extends Component {
     }
     render() {
         return(
-            <form className="col-md-6 form-horizontal"  onSubmit={this.addPost}>
+            <form className="col-md-6 form-horizontal"  onSubmit={this.addPost} action="/">
             <fieldset>
                 <legend>Post a new article</legend>
                 <div className="form-group ">

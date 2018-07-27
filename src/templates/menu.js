@@ -19,7 +19,7 @@ export default props => (
                      <ul className="nav navbar-nav navbar-right">
                      <li>
                      <Link to={{
-                                pathname: '/addPost/',
+                                pathname: '/post/add',
                             }}>
                          <button type="button" className="btn btn-danger navbar-btn">
                          <span className="glyphicon glyphicon-plus" aria-hidden="true"></span>

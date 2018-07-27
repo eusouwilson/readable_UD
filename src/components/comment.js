@@ -1,8 +1,11 @@
 import React, { Component }  from 'react'; 
-import {fetchVoteComment} from '../actions/actions';
+import {fetchVoteComment, fetchDeleteComment} from '../actions/actions';
 import {connect} from "react-redux";
 
 class Comment extends Component {
+    deleteComment = () => {
+        this.props.dispatch(fetchDeleteComment(this.props.comment.id))
+    }
     render() {
         return(
         <div key={this.props.comment.id}>
@@ -19,6 +22,12 @@ class Comment extends Component {
             <button type="button" className="btn btn-default" aria-label="DisLike" onClick={() => (
                         this.props.dispatch(fetchVoteComment(this.props.comment.id, {option: "downVote"})))}>
                 <span className="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+            </button> 
+            <button type="button" className="btn btn-default" aria-label="DisLike" onClick={this.deleteComment}>
+                 <span className="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>
+            <button type="button" className="btn btn-default" aria-label="DisLike" onClick={this.deleteComment}>
+                 <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </button> 
          </div>     
         

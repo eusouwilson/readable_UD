@@ -33,6 +33,16 @@ export function addComment(comment) {
 export const fetchAddComment = (body) => dispatch => {
     postAPI.addComment(body).then((comment) => dispatch(addComment(comment)))
 }
+export const DELETE_COMMENT = 'DELETE_COMMENT'
+export function deleteComment(comment) {
+    return {
+        type: DELETE_COMMENT,
+        comment
+    }
+}
+export const fetchDeleteComment = (id) => dispatch => {
+    postAPI.deleteComment(id).then((comment) => dispatch(deleteComment(comment)))
+}
 
 // lista todas as categorias
 export const GET_CATEGORY = 'GET_CATEGORY'
@@ -102,4 +112,26 @@ export function addPost(posts) {
 }
 export const fetchAddPost = (body) => dispatch => {
     postAPI.addPost(body).then((posts) => dispatch(addPost(posts)))
+}
+
+export const EDIT_POST = 'EDIT_POST'
+export function editPost(post) {
+    return {
+        type: EDIT_POST,
+        post,
+    }
+}
+export const fetchEditPost = (id, body) => dispatch => {
+    postAPI.editPost(id, body).then((post) => dispatch(editPost(post)))
+}
+
+export const DELETE_POST = 'DELETE_POST'
+export function deletePost(posts) {
+    return {
+        type: DELETE_POST,
+        posts
+    }
+}
+export const fetchDeletePost = (id) => dispatch => {
+    postAPI.deletePost(id).then((posts) => dispatch(deletePost(posts)))
 }

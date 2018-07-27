@@ -8,6 +8,7 @@ import Menu from './templates/menu';
 import CategoryPosts from './components/categoryPosts';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import AddPost from './components/addPost'
+import  EditPost  from './components/editPost';
 class App extends Component {
 
   render() {
@@ -18,8 +19,9 @@ class App extends Component {
           <Switch>
               <Route exact path="/" component={Posts}></Route>
               <Route exact path="/posts" component={Posts}></Route>
-              <Route exact path="/addPost" component={AddPost}></Route>
-              <Route path="/:posts/:id" component={postDetail}></Route>
+              <Route exact path="/post/add" component={AddPost}></Route>
+              <Route exact path="/:posts/:id" component={postDetail}></Route>
+              <Route exact path="/post/edit/:id" component={EditPost}></Route>
               <Route exact path="/:category" component={CategoryPosts}></Route>
           </Switch>          
       </div>

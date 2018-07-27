@@ -1,11 +1,14 @@
 import React, { Component }  from 'react'
 import {Link} from 'react-router-dom'
 import { timeStampToString} from '../utils/utils';
-import {fetchVotePost} from '../actions/actions'
+import {fetchVotePost, fetchDeletePost} from '../actions/actions'
 import '../App.css';
 import {connect} from "react-redux";
 import PostComment from "./addComment"
 class Post extends Component {
+    deletePost = () => {
+        this.props.dispatch(fetchDeletePost(this.props.post.id))
+    }
 
     render() {
         return(  
@@ -41,6 +44,17 @@ class Post extends Component {
             )}>
                 <span className="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
             </button> 
+            <Link to={{
+                            pathname: `/post/edit/${this.props.post.id}`,       
+                            }}>
+            <button type="button" className="btn btn-default" aria-label="Edit">
+                <span className="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button> 
+            </Link>
+            <button type="button" className="btn btn-default" aria-label="DisLike" onClick={this.deletePost}>
+                <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button> 
+            
             <h4>{this.props.post.commentCount} - COMMENTS</h4>
             <PostComment post={this.props.post} /> 
             <hr/> 
