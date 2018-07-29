@@ -27,7 +27,7 @@ export const getUid = function uuid(len, radix) {
     return uuid.join('');
 }
 
-
+// convert timestamp date to Brazilian format
 export const timeStampToString = (time) => {
     var datetime = new Date();
     datetime.setTime(time);
@@ -36,8 +36,10 @@ export const timeStampToString = (time) => {
     var date = datetime.getDate();
     var hour = datetime.getHours();
     var minute = datetime.getMinutes();
-    return year + "-" + month + "-" + date + " " + hour + ":" + minute;
+    return date + "-" + month + "-" + year + " " + hour + ":" + minute;
 }
+
+//organize posts by date
 export const sortByTime = (data) => {
     let temp;
     for (let i = 0; i < data.length; i++) {
@@ -51,6 +53,7 @@ export const sortByTime = (data) => {
     }
 }
 
+//organize posts by score
 export const sortByVoteScore = (data) => {
     let temp;
     for (let i = 0; i < data.length; i++) {

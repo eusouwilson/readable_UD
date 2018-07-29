@@ -4,12 +4,14 @@ import {
     GET_CATEGORY,
     GET_POST_CATEGORY,
     GET_COMMENTS,
+    GET_COMMENT,
     VOTE_POST,
     VOTE_COMMENT,
     DELETE_COMMENT,
     ADD_POST,
     EDIT_POST,
-    DELETE_POST
+    DELETE_POST,
+    EDIT_COMMENT
 
 } from "../actions/actions";
 
@@ -61,6 +63,16 @@ function posts(state = initialPostState, action) {
                 ...state,
                 posts: state.posts,
                 comments: action.comments
+            }
+        case GET_COMMENT:
+            return {
+                ...state,
+                comment: action.comment,
+            }   
+        case EDIT_COMMENT:
+            return {
+                ...state,
+
             }
         case DELETE_COMMENT:
             for (var i = state.comments.length - 1; i >= 0; i--) {

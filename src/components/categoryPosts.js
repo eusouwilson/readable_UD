@@ -3,9 +3,17 @@ import {fetchPostCategory} from "../actions/actions"
 import {connect} from "react-redux"
 import Post from './post'
 import Categories from './categories'
+import {sortByVoteScore, sortByTime} from "../utils/utils"
+
 
 
 class CategoryPosts extends Component {
+    constructor() {
+        super();
+        this.state = {
+            StateRefresh: 0,
+        }
+    }
 
     componentDidMount() { 
      this.props.dispatch(fetchPostCategory(this.props.match.params.category))
@@ -21,6 +29,21 @@ class CategoryPosts extends Component {
     render() {
         return(
           <div className="container">
+             <div>
+              Sort By: <button type="button" className="btn btn-default" aria-label="Like"  onClick={(e) => {
+                                               sortByTime(this.props.posts)
+                                               this.setState({StateRefresh: this.state.StateRefresh + 1})
+                                           }}>
+              Date
+              </button> 
+              <button type="button" className="btn btn-default" aria-label="DisLike"  onClick={(e) => {
+                                               sortByVoteScore(this.props.posts)
+                                               this.setState({StateRefresh: this.state.StateRefresh + 1})
+                                           }}>
+              Score
+              </button> 
+        
+          </div>
             <div className="row" >
             <div className="col-md-8">
                 {this.props.posts.map(post => (

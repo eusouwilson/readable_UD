@@ -4,11 +4,12 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import Posts from './components/posts';
 import postDetail from './components/postDetail';
-import Menu from './templates/menu';
+import Menu from './viewers/menu';
 import CategoryPosts from './components/categoryPosts';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import AddPost from './components/addPost'
 import  EditPost  from './components/editPost';
+import EditComment from './components/editComment';
 class App extends Component {
 
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
               <Route exact path="/post/add" component={AddPost}></Route>
               <Route exact path="/:posts/:id" component={postDetail}></Route>
               <Route exact path="/post/edit/:id" component={EditPost}></Route>
+              <Route exact path="/comment/edit/:id" component={EditComment}></Route>
               <Route exact path="/:category" component={CategoryPosts}></Route>
           </Switch>          
       </div>

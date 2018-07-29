@@ -7,21 +7,26 @@ if (!token)
 const headers = {
   'Authorization': token
 }
-
+// list all posts
 export const getAll = () =>
     fetch(`${api}/posts`, {headers})
         .then(res => res.json())
         .then(data => data)
+
+// list all Categories
 export const getCategories = () =>
     fetch(`${api}/categories`, {headers})
         .then(res => res.json())
         .then(data => data.categories)
 
+// filter post by your id        
 export const getArticleById = (id) =>
     fetch(`${api}/posts/${id}`, {headers})
         .then(res => res.json())
         .then(data => data)
 
+
+// Add a comment to a post
 export const addComment = (bodyContent) =>
       fetch(`${api}/comments`, {
           method: 'POST',
@@ -31,6 +36,14 @@ export const addComment = (bodyContent) =>
           },
           body: JSON.stringify(bodyContent)
       }).then(res => res.json())
+
+// filter comment by your id 
+export const getCommentById = (id) =>
+      fetch(`${api}/comments/${id}`, {headers})
+          .then(res => res.json())
+          .then(data => data)
+  
+// delete a comment  
 export const deleteComment = (id) =>
       fetch(`${api}/comments/${id}`, {
           method: 'DELETE',
@@ -41,16 +54,31 @@ export const deleteComment = (id) =>
       }).then(res => res.json())
           .then(data => data)      
 
+// edit a comment          
+export const editComment = (id, bodyContent) =>
+      fetch(`${api}/comments/${id}`, {
+            method: 'PUT',
+            headers: {
+                ...headers,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bodyContent)
+       }).then(res => res.json())
+
+       
+//list all the comments of a given post       
 export const getCommentsById = (id) =>
       fetch(`${api}/posts/${id}/comments`, {headers})
           .then(res => res.json())
           .then(data => data)
 
+//list all posts by categories          
 export const getAllByCategories = (category) =>
     fetch(`${api}/${category}/posts`, {headers})
         .then(res => res.json())
         .then(data => data)
-        
+
+//add a vote to a post        
 export const votePost = (id, bodyContent) =>
     fetch(`${api}/posts/${id}`, {
         method: 'POST',
@@ -60,7 +88,8 @@ export const votePost = (id, bodyContent) =>
         },
         body: JSON.stringify(bodyContent)
     }).then(res => res.json())
-    
+
+//add a vote to a comment   
 export const voteComment = (id, bodyContent) =>
     fetch(`${api}/comments/${id}`, {
         method: 'POST',
@@ -72,8 +101,8 @@ export const voteComment = (id, bodyContent) =>
     }).then(res => res.json())
         .then(data => data)
 
-
-    export const addPost = (bodyContent) =>
+//add a new post
+export const addPost = (bodyContent) =>
     fetch(`${api}/posts`, {
         method: 'POST',
         headers: {
@@ -83,7 +112,8 @@ export const voteComment = (id, bodyContent) =>
         body: JSON.stringify(bodyContent)
     }).then(res => res.json())
 
-    export const editPost = (id, bodyContent) =>
+//edit a certain post
+export const editPost = (id, bodyContent) =>
     fetch(`${api}/posts/${id}`, {
         method: 'PUT',
         headers: {
@@ -93,7 +123,8 @@ export const voteComment = (id, bodyContent) =>
         body: JSON.stringify(bodyContent)
     }).then(res => res.json())
 
-    export const deletePost = (id) =>
+//delete a certain post
+export const deletePost = (id) =>
     fetch(`${api}/posts/${id}`, {
         method: 'DELETE',
         headers: {

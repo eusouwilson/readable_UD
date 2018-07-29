@@ -1,9 +1,11 @@
 
-import React from 'react'
+import React,{Component} from 'react'
 import {Link} from 'react-router-dom'
 
-export default props => (
-<nav className='navbar navbar-inverse bg-inverse'>
+class  Menu extends Component{
+      render() {
+        return  (   
+            <nav className='navbar navbar-inverse bg-inverse'>
              <div className='container'>
                  <div className='navbar-header'>
                      <a className='navbar-brand' href='/'>
@@ -12,9 +14,7 @@ export default props => (
                 </div>
                  <div id='navbar' className='navbar-collapse collapse'>
                      <ul className="nav navbar-nav">
-                         <li><a href='/posts'>Posts</a></li>
-                         <li><a href='/categories'>Categories</a></li>
-
+                         <li><a href='/posts'>All Posts</a></li>
                      </ul>
                      <ul className="nav navbar-nav navbar-right">
                      <li>
@@ -30,5 +30,9 @@ export default props => (
                      </ul>
                  </div>
              </div>
-</nav> 
-)
+           </nav> 
+        )
+    }
+}
+
+export default Menu
