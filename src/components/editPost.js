@@ -1,21 +1,20 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {fetchPost, fetchEditPost} from "../actions/actions";
+import { bindActionCreators } from 'redux';
 
 class EditPost extends Component {
     title = ""
     body = ""
     putPost = () => {
-        this.props.dispatch(fetchEditPost(this.props.post.id,{title:this.title, body:this.body}))
+        this.props.fetchEditPost(this.props.post.id,{title:this.title, body:this.body})
     }
 
     componentDidMount() {
-        this.props.dispatch(fetchPost(this.props.match.params.id))
-        console.log(this.props.match)
+        this.props.fetchPost(this.props.match.params.id)
     }
 
     render() {
-        console.log(this.props)
         return (
             <form action="/" className="col-md-6 form-horizontal" onSubmit={this.putPost}>
                 <fieldset>
@@ -37,8 +36,14 @@ class EditPost extends Component {
     }
 }
 
-function mapStateToProps(state, props) {
-    return {post:state.posts}
-}
+const mapStateToProps = state =>({
+    post:state.posts
+})
 
-export default connect(mapStateToProps)(EditPost);
+const mapDispatchToProps = dispatch => {
+    return {
+         ...bindActionCreators({fetchEditPost, fetchPost}, dispatch)
+ }
+ }
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditPost);

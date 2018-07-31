@@ -3,13 +3,11 @@ import {fetchPost, fetchAllComments} from '../actions/actions'
 import {connect} from 'react-redux';
 import Comment from './comment' 
 import Categories from './categories'
-
 import Post from './post'
 
 class PostDetail extends Component {
      componentDidMount() {
-        this.props.dispatch(fetchAllComments(this.props.match.params.id))
-        this.props.dispatch(fetchPost(this.props.match.params.id))
+        this.props.getPost(this.props.match.params.id)
     } 
  
     render() {
@@ -46,13 +44,21 @@ class PostDetail extends Component {
     
     }; 
 }
-function mapStateToProps(state) {
-    return {
-        comments: state.comments,
-        post: state.posts,
-        state: state,
-        error: state.error
-    }
-}
 
-export default connect(mapStateToProps)(PostDetail);
+const mapStateToProps = state => ({
+    post: state.post,
+    state: state,
+    comments: state.comments,
+    error: state.error
+  })
+  
+const mapDispatchToProps = dispatch => ({
+    getPost: (id) =>  {
+            dispatch(fetchAllComments(id)); 
+            dispatch(fetchPost(id))
+    }
+})
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);

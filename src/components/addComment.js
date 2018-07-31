@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {fetchAddComment} from "../actions/actions"
 import {getUid} from "../utils/utils"
 import {connect} from "react-redux";
+import { bindActionCreators } from 'redux';
 
 class PostComment extends Component {
 
@@ -9,13 +10,13 @@ class PostComment extends Component {
 body = "";
 author = "";
  addComment = () => {
-    this.props.dispatch(fetchAddComment({
+    this.props.fetchAddComment({
         id: getUid(24, 16),
         timestamp: Date.now(),
         body: this.body,
         author: this.author,
         parentId: this.props.post.id
-    }))
+    })
 }
 
 render() {
@@ -50,6 +51,10 @@ function mapStateToProps(state) {
         state: state
     }
 }
+const mapDispatchToProps = dispatch => {
+    return {
+         ...bindActionCreators({fetchAddComment }, dispatch)
+ }
+ }
 
-
-export default connect(mapStateToProps)(PostComment);
+export default connect(mapStateToProps, mapDispatchToProps)(PostComment);

@@ -10,6 +10,9 @@ To get started developing right away:
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 
+* install all project dependencies with `yarn install`
+* start the development server with `yarn start`
+
 ## What You're Getting
 ```bash
 ├── CONTRIBUTING.md
@@ -40,7 +43,7 @@ To get started developing right away:
     │    └── menu.js # contains all menu.
     └── utils
     │    ├── Api.js # A JavaScript API for the provided 
-         └── utils.js # contains utilities as one generated from uuid and others
+         └── utils.js # contains utilities as one generated from uuid (which is an improved version of that found in this link: https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript) and timeStampToString found in this link:(https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript)
     ├── index.css # Global styles. You probably won't need to change anything here.
     └── index.js # You should not need to modify this file. It is used for DOM rendering only.
 ```

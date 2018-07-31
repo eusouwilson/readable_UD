@@ -3,11 +3,12 @@ import {fetchAddPost, fetchAllCategories} from '../actions/actions'
 import ReactDOM from "react-dom"
 import {getUid} from "../utils/utils"
 import {connect} from "react-redux";
+import { bindActionCreators } from 'redux';
 
 class AddPost  extends Component {
 
     componentDidMount() {
-        this.props.dispatch(fetchAllCategories())
+        this.props.fetchAllCategories()
     }
 
         title = ""
@@ -16,7 +17,7 @@ class AddPost  extends Component {
     addPost = () => {
         var index = ReactDOM.findDOMNode(this.refs.select).selectedIndex
         var category = ReactDOM.findDOMNode(this.refs.select).options[index].innerHTML
-       this.props.dispatch(fetchAddPost({
+       this.props.fetchAddPost({
             id: getUid(24, 16),
             timestamp: Date.now(),
             body: this.body,
@@ -24,8 +25,7 @@ class AddPost  extends Component {
             title: this.title,
             category: category
 
-        }))
-        console.log(getUid(24, 16))
+        })
 
     }
     render() {
@@ -80,5 +80,11 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(AddPost);
+const mapDispatchToProps = dispatch => {
+    return {
+         ...bindActionCreators({fetchAllCategories,fetchAddPost }, dispatch)
+ }
+ }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddPost);
 

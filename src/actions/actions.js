@@ -8,21 +8,36 @@ export function getPosts(posts) {
         posts
     }
 }
-export const fetchAllPosts = () => dispatch => {
-    postAPI.getAll().then((posts) => dispatch(getPosts(posts)))
+
+export const fetchAllPosts = (sort) => dispatch => {
+    if(sort === 'byDate') {
+        postAPI.getAll().then((posts) => dispatch(getPosts(posts.filter(post => post.deleted !== true ).sort(function(obj1, obj2) {
+            return obj1.timestamp - obj2.timestamp;
+        }))))
+    }else if (sort === 'score') {
+        postAPI.getAll().then((posts) => dispatch(getPosts(posts.filter(post => post.deleted !== true ).sort(function(obj1, obj2) {
+            return obj2.voteScore - obj1.voteScore;
+        }))))
+    }
+    else{
+        postAPI.getAll().then((posts) => dispatch(getPosts(posts.filter(post => post.deleted !== true ).sort(function(obj1, obj2) {
+            return obj2.timestamp - obj1.timestamp;
+        }))))
+    }
+   
 }
 
 // list a particular post
 export const GET_POST = 'GET_POST'
-export function getPost(posts, comments) {
+export function getPost(post, comments) {
     return {
         type: GET_POST,
-        posts,
+        post,
         comments
     }
 }
 export const fetchPost = (id) => dispatch => {
-    postAPI.getArticleById(id).then((posts) => dispatch(getPost(posts)))
+    postAPI.getArticleById(id).then((post) => dispatch(getPost(post)))
 }
 
 // Add a comment to a post
@@ -69,8 +84,21 @@ export function getPostCategory(posts) {
         posts
         }
 }
-export const fetchPostCategory = (category) => dispatch => {
-    postAPI.getAllByCategories(category).then((posts) => dispatch(getPostCategory(posts)))
+export const fetchPostCategory = (category, sort) => dispatch => {
+    if(sort === 'byDate') {
+        postAPI.getAllByCategories(category).then((posts) => dispatch(getPostCategory(posts.filter(post => post.deleted !== true ).sort(function(obj1, obj2) {
+            return obj1.timestamp - obj2.timestamp;
+        }))))
+    }else if (sort === 'score') {
+        postAPI.getAllByCategories(category).then((posts) => dispatch(getPostCategory(posts.filter(post => post.deleted !== true ).sort(function(obj1, obj2) {
+            return obj2.voteScore - obj1.voteScore;
+        }))))
+    }
+    else{
+        postAPI.getAllByCategories(category).then((posts) => dispatch(getPostCategory(posts.filter(post => post.deleted !== true ).sort(function(obj1, obj2) {
+            return obj2.timestamp - obj1.timestamp;
+        }))))
+    }
 }
 
 //list all the comments of a given post

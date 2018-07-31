@@ -3,7 +3,7 @@ import {fetchPostCategory} from "../actions/actions"
 import {connect} from "react-redux"
 import Post from './post'
 import Categories from './categories'
-import {sortByVoteScore, sortByTime} from "../utils/utils"
+import { bindActionCreators } from 'redux';
 
 
 
@@ -16,13 +16,11 @@ class CategoryPosts extends Component {
     }
 
     componentDidMount() { 
-     this.props.dispatch(fetchPostCategory(this.props.match.params.category))
-     console.log(this.props)
-
+     this.props.fetchPostCategory(this.props.match.params.category)
     } 
     componentDidUpdate(prevProps) {
          if (this.props.match.params.category !== prevProps.match.params.category) {
-             this.props.dispatch(fetchPostCategory(this.props.match.params.category))
+             this.props.fetchPostCategory(this.props.match.params.category)
         }
       } 
 
@@ -31,14 +29,14 @@ class CategoryPosts extends Component {
           <div className="container">
              <div>
               Sort By: <button type="button" className="btn btn-default" aria-label="Like"  onClick={(e) => {
-                                               sortByTime(this.props.posts)
-                                               this.setState({StateRefresh: this.state.StateRefresh + 1})
+                                                this.props.fetchPostCategory(this.props.match.params.category, 'byDate');
+                                                this.setState({StateRefresh: this.state.StateRefresh + 1})
                                            }}>
               Date
               </button> 
               <button type="button" className="btn btn-default" aria-label="DisLike"  onClick={(e) => {
-                                               sortByVoteScore(this.props.posts)
-                                               this.setState({StateRefresh: this.state.StateRefresh + 1})
+                                                this.props.fetchPostCategory(this.props.match.params.category, 'score');
+                                                this.setState({StateRefresh: this.state.StateRefresh + 1})
                                            }}>
               Score
               </button> 
@@ -61,12 +59,14 @@ class CategoryPosts extends Component {
     
 }
 
-function mapStateToProps(state) {
-    return {
+const mapStateToProps = state => ({
         posts: state.posts,
         state: state
-    }
-}
+})
 
+const mapDispatchToProps = dispatch => ({
+    ...bindActionCreators({fetchPostCategory}, dispatch)
+
+ })
   
-export default connect(mapStateToProps)(CategoryPosts);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryPosts);

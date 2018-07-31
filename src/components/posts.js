@@ -2,42 +2,38 @@ import React, { Component }  from 'react'
 import {fetchAllPosts} from "../actions/actions"
 import {connect} from "react-redux"
 import Post from './post'
-import {sortByVoteScore, sortByTime} from "../utils/utils"
 import Categories from './categories'
+import { bindActionCreators } from 'redux';
+
 
 
 class Posts extends Component {
     constructor() {
         super();
         this.state = {
-            StateRefresh: 0,
+            StateRefresh: 0
         }
     }
 
     category = ""
     sorted = ""
     componentDidMount() {        
-       this.props.dispatch(fetchAllPosts())
+        this.props.fetchAllPosts();
     }
-  
-    sortByCategories = () => {
-        
-    }
-
     render() {
         
         return(
           <div className="container">
           <div>
               Sort By: <button type="button" className="btn btn-default" aria-label="Like"  onClick={(e) => {
-                                               sortByTime(this.props.posts)
+                                                this.props.fetchAllPosts('byDate');
                                                this.setState({StateRefresh: this.state.StateRefresh + 1})
                                            }}>
               Date
               </button> 
               <button type="button" className="btn btn-default" aria-label="DisLike"  onClick={(e) => {
-                                               sortByVoteScore(this.props.posts)
-                                               this.setState({StateRefresh: this.state.StateRefresh + 1})
+                                                this.props.fetchAllPosts('score');
+                                                this.setState({StateRefresh: this.state.StateRefresh + 1})
                                            }}>
               Score
               </button> 
@@ -45,7 +41,7 @@ class Posts extends Component {
           </div>
             <div className="row" >
                 <div className="col-md-8">
-                    {this.props.posts.filter(post => post.deleted === false ).map(post => (
+                    {this.props.posts.map(post => (
                         <Post key={post.id} post={post}  />
                     ))}
                 </div>
@@ -60,13 +56,20 @@ class Posts extends Component {
     
 }
 
-function mapStateToProps(state) {
-    return {
-        posts: state.posts,
-        state: state,
-        comments: state.comments
 
-    }
-}
 
-export default connect(mapStateToProps)(Posts);
+const mapStateToProps = state => ({
+    posts: state.posts,
+    state: state,
+    comments: state.comments,
+  })
+  
+
+
+const mapDispatchToProps = dispatch => ({
+    ...bindActionCreators({fetchAllPosts}, dispatch)
+
+  })
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);

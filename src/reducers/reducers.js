@@ -11,34 +11,32 @@ import {
     ADD_POST,
     EDIT_POST,
     DELETE_POST,
-    EDIT_COMMENT
-
+    EDIT_COMMENT,
 } from "../actions/actions";
-
 const initialPostState = {
     posts: [],
     comments: [],
-    post: [],
     comment: [],
-    categories: []
+    categories: [],
+    post: {},
 }
 
 function posts(state = initialPostState, action) {
-    var temp;
+    let temp;
     switch (action.type) {
         case GET_POSTS:
             return {
                 ...state,
-                posts: action.posts
+                posts: action.posts.filter(post => post.deleted !== true )
             }
         case GET_POST:
             let error = ""
-            if(action.posts.error || JSON.stringify(action.posts)==='{}') {
+            if(action.post.error || JSON.stringify(action.post)==='{}') {
                 error = true
             }
             return {
                 ...state,
-                posts: action.posts,
+                post: action.post,
                 comments: state.comments,
                 error: error
             }
@@ -84,8 +82,12 @@ function posts(state = initialPostState, action) {
                 ...state
             }
         case VOTE_POST:
-            temp = Object.entries(state)[0][1]
-            temp.map((posts) => posts.id === action.posts.id ? posts.voteScore = action.posts.voteScore : "")
+            temp = state.posts
+            if (temp.length) {
+                temp.map((posts) => posts.id === action.posts.id ? posts.voteScore = action.posts.voteScore : "")
+            }else{
+                temp.voteScore = action.posts.voteScore 
+            }
             return {
                 ...state,
                 posts: temp

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'; 
 import '../node_modules/font-awesome/css/font-awesome.min.css';
@@ -10,7 +10,8 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import AddPost from './components/addPost'
 import  EditPost  from './components/editPost';
 import EditComment from './components/editComment';
-class App extends Component {
+
+const App = () => ({
 
   render() {
     return (
@@ -28,9 +29,8 @@ class App extends Component {
           </Switch>          
       </div>
       </BrowserRouter>
-
     );
   }
-}
+})
 
 export default App;

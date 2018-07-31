@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 class Categories extends Component {
     
     componentDidMount() {
-        this.props.dispatch(fetchAllCategories())
+        this.props.fetchAllCategories()
     }
  
     render() {
@@ -34,4 +34,8 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Categories);
+const mapDispatchToProps = dispatch => ({
+    fetchAllCategories: () => dispatch(fetchAllCategories())
+ })
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);

@@ -1,23 +1,23 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {fetchComment, fetchEditComment} from "../actions/actions";
+import { bindActionCreators } from 'redux';
 
 class EditComment extends Component {
     body = ""
     body = ""
     putComment = () => {
-        this.props.dispatch(fetchEditComment(this.props.comment.id, {
+        this.props.fetchEditComment(this.props.comment.id, {
             timestamp: Date.now(), body: this.body
-        }))
+        })
     }
 
     componentDidMount() {
-        this.props.dispatch(fetchComment(this.props.match.params.id))
+        this.props.fetchComment(this.props.match.params.id)
 
     }
 
     render() {
-        console.log(this.props)
         return (
             <form action="/" className="col-md-6 form-horizontal" onSubmit={this.putComment}>
                 <fieldset>
@@ -35,10 +35,13 @@ class EditComment extends Component {
     }
 }
 
-function mapStateToProps(state, props) {
-    return {
-        comment: state.comment,
-    }
-}
+const mapStateToProps = state => ({
+        comment: state.comment
+})
 
-export default connect(mapStateToProps)(EditComment);
+const mapDispatchToProps = dispatch => {
+    return {
+         ...bindActionCreators({fetchComment, fetchEditComment}, dispatch)
+ }
+ }
+export default connect(mapStateToProps, mapDispatchToProps)(EditComment);

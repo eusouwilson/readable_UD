@@ -5,9 +5,10 @@ import {fetchVotePost, fetchDeletePost} from '../actions/actions'
 import '../App.css';
 import {connect} from "react-redux";
 import PostComment from "./addComment"
+import { bindActionCreators } from 'redux';
 class Post extends Component {
     deletePost = () => {
-        this.props.dispatch(fetchDeletePost(this.props.post.id))
+        this.props.fetchDeletePost(this.props.post.id)
     }
 
     render() {
@@ -32,7 +33,7 @@ class Post extends Component {
             <p>{this.props.post.body}</p>
 
             <button type="button" className="btn btn-default" aria-label="Like" onClick={() => (
-                this.props.dispatch(fetchVotePost(this.props.post.id, {option: "upVote"}))
+                this.props.fetchVotePost(this.props.post.id, {option: "upVote"})
             )}>
                 <span className="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
             </button> 
@@ -40,7 +41,7 @@ class Post extends Component {
             Score {this.props.post.voteScore}
             </button>                        
             <button type="button" className="btn btn-default" aria-label="DisLike" onClick={() => (
-                this.props.dispatch(fetchVotePost(this.props.post.id, {option: "downVote"}))
+                this.props.fetchVotePost(this.props.post.id, {option: "downVote"})
             )}>
                 <span className="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
             </button> 
@@ -51,10 +52,13 @@ class Post extends Component {
                 <span className="glyphicon glyphicon-edit" aria-hidden="true"></span>
             </button> 
             </Link>
-            <button type="button" className="btn btn-default" aria-label="DisLike" onClick={this.deletePost}>
+            <Link to={{
+                            pathname:'/',       
+                            }}>
+            <button type="button" className="btn btn-default" aria-label="Delete" onClick={this.deletePost}>
                 <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </button> 
-            
+            </Link>
             <h4>{this.props.post.commentCount} - COMMENTS</h4>
             <PostComment post={this.props.post} /> 
             <hr/> 
@@ -66,13 +70,15 @@ class Post extends Component {
     }; 
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => ({
+        posts: state.post,
+        state: state  
+})
 
-    return {
-        posts: state.posts,
-        state: state
-    }
+const mapDispatchToProps = dispatch => {
+   return {
+        ...bindActionCreators({fetchDeletePost, fetchVotePost}, dispatch)
+}
 }
 
-
-export default connect(mapStateToProps)(Post);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

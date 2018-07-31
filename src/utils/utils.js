@@ -38,32 +38,3 @@ export const timeStampToString = (time) => {
     var minute = datetime.getMinutes();
     return date + "-" + month + "-" + year + " " + hour + ":" + minute;
 }
-
-//organize posts by date
-export const sortByTime = (data) => {
-    let temp;
-    for (let i = 0; i < data.length; i++) {
-        for (let j = i; j < data.length; j++) {
-            if (timeStampToString(data[j].timestamp) > timeStampToString(data[i].timestamp)) {
-                temp = data[i]
-                data[i] = data[j]
-                data[j] = temp
-            }
-        }
-    }
-}
-
-//organize posts by score
-export const sortByVoteScore = (data) => {
-    let temp;
-    for (let i = 0; i < data.length; i++) {
-        for (let j = i; j < data.length; j++) {
-            if (data[j].voteScore > data[i].voteScore) {
-                temp = data[i]
-                data[i] = data[j]
-                data[j] = temp
-            }
-        }
-    }
-}
-
