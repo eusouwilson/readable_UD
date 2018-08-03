@@ -15,8 +15,8 @@ class AddPost  extends Component {
         body = "";
         author = "";
     addPost = () => {
-        var index = ReactDOM.findDOMNode(this.refs.select).selectedIndex
-        var category = ReactDOM.findDOMNode(this.refs.select).options[index].innerHTML
+        const index = ReactDOM.findDOMNode(this.refs.select).selectedIndex
+        const category = ReactDOM.findDOMNode(this.refs.select).options[index].innerHTML
        this.props.fetchAddPost({
             id: getUid(24, 16),
             timestamp: Date.now(),

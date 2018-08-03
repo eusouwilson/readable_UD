@@ -4,8 +4,7 @@ import {fetchComment, fetchEditComment} from "../actions/actions";
 import { bindActionCreators } from 'redux';
 
 class EditComment extends Component {
-    body = ""
-    body = ""
+    body = this.props.comment.body
     putComment = () => {
         this.props.fetchEditComment(this.props.comment.id, {
             timestamp: Date.now(), body: this.body
@@ -19,14 +18,14 @@ class EditComment extends Component {
 
     render() {
         return (
-            <form action="/" className="col-md-6 form-horizontal" onSubmit={this.putComment}>
+            <form action={`/detail/${this.props.comment.parentId}`} className="col-md-6 form-horizontal" onSubmit={this.putComment}>
                 <fieldset>
                 <legend>Edit a comment</legend>
                     <div className="form-group">
                         <label htmlFor="body">Body:</label>
-                        <textarea className="form-control input-md" id="body" placeholder={this.props.comment.body}
+                        <input type='text' className="form-control input-md" id="body" defaultValue={this.props.comment.body}
                                   onChange={(e) => this.body = e.target.value}>
-                        </textarea>
+                        </input>
                     </div>
                 </fieldset>
                 <button className="botaoEnviar" type="submit">Enviar</button>

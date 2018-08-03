@@ -15,8 +15,6 @@ class Posts extends Component {
         }
     }
 
-    category = ""
-    sorted = ""
     componentDidMount() {        
         this.props.fetchAllPosts();
     }

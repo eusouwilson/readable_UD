@@ -6,12 +6,11 @@ The user can edit the comment or remove it
 ## TL;DR
 
 To get started developing right away:
-
+Available only for npm
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 
-* install all project dependencies with `yarn install`
-* start the development server with `yarn start`
+
 
 ## What You're Getting
 ```bash
@@ -21,7 +20,7 @@ To get started developing right away:
 ├── public
 │   ├── favicon.ico # React Icon, You may change if you wish.
 │   └── index.html # DO NOT MODIFY
-└── src
+└── api-server # server provided by udacity to initialize it execute 'node server'
     └── actions
     │    └── actions.js # contains all actions used
     ├── App.css # Styles for your app. Feel free to customize this as you desire.
