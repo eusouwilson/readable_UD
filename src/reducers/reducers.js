@@ -9,6 +9,7 @@ import {
     VOTE_COMMENT,
     DELETE_COMMENT,
     ADD_POST,
+    ADD_COMMENT,
     EDIT_POST,
     DELETE_POST,
     EDIT_COMMENT,
@@ -22,7 +23,6 @@ const initialPostState = {
 
 function posts(state = initialPostState, action) {
     let temp;
-    let tempPost;
     switch (action.type) {
         case GET_POSTS:
             return {
@@ -31,12 +31,12 @@ function posts(state = initialPostState, action) {
             }
         case GET_POST:
             let error = ""
-            if(action.posts.error || action.posts==='[]') {
+            if(action.posts.error || action.posts==='{}') {
                 error = true    
             }
             return {
                 ...state,
-                posts: action.posts,
+                posts: [action.posts],
                 comments: state.comments,
                 error: error
             }
@@ -55,7 +55,12 @@ function posts(state = initialPostState, action) {
                 ...state,
                 categories: action.categories
             }
-        
+        case ADD_COMMENT:
+            return {
+                ...state,
+
+            }
+
         case GET_COMMENTS:
             return {
                 ...state,
@@ -73,48 +78,52 @@ function posts(state = initialPostState, action) {
 
             }
         case DELETE_COMMENT:
-            tempPost = {...state.posts}
+            const updatePost = state.posts.map(post =>
+                post.id === action.comment.parentId ? {
+                    ...post,
+                    commentCount: post.commentCount -1
+                } : post
+            )
+            console.log(updatePost)
+
             temp = state.comments.filter(comment => comment.id !== action.comment.id)
-            tempPost.commentCount = tempPost.commentCount -1
             return {
                 ...state,
-                posts: tempPost,
+                posts: updatePost,
                 comments: temp
             }
         case VOTE_POST:
-            if (state.posts.length) {
-                temp = state.posts.slice()
-                temp.map((posts) => posts.id === action.posts.id ? posts.voteScore = action.posts.voteScore : "")
-            }else{
-                temp = {...state.posts}
-                temp.voteScore = action.posts.voteScore 
-            }
+                const votePost = state.posts.map(post =>
+                    post.id === action.posts.id ? 
+                    {
+                        ...post,
+                        voteScore: action.posts.voteScore
+                    } : post
+                )
             return {
                 ...state,
-                posts: temp
+                posts: votePost
             }
         case VOTE_COMMENT:
-            temp = state.comments.slice()
-            temp.map((comment) => comment.id === action.comment.id ?  comment.voteScore = action.comment.voteScore : "")
-            return {
+            const voteComment = state.comments.map(comment =>
+                comment.id === action.comment.id ? 
+                {
+                    ...comment,
+                    voteScore: action.comment.voteScore
+                } : comment
+            )
+         return {
                 ...state,
-                comments: temp
+                comments: voteComment
 
             }
         case ADD_POST:
-            temp = {...state.posts}
-            temp.push(action.posts)
             return {
                 ...state,
             }            
         case EDIT_POST:
-            temp = state.posts.slice()
-            temp.map((post) => post.id === action.post.id ? post.voteScore = action.post.voteScore : "")
-            
             return {
-                ...state,
-                posts: temp
-
+                ...state
             }
         case DELETE_POST:
             state.posts.length?  temp = state.posts.slice().filter(post => post.id !== action.posts.id): temp =[]
