@@ -3,6 +3,7 @@ import {fetchAddComment} from "../actions/actions"
 import {getUid} from "../utils/utils"
 import {connect} from "react-redux";
 import { bindActionCreators } from 'redux';
+import Error from './error';
 
 class PostComment extends Component {
 
@@ -20,7 +21,11 @@ author = "";
 }
 
 render() {
-
+    if (this.props.error) {
+        return (
+            <Error/>
+        )
+    } else
     return (    
     <form className="form-inline" onSubmit={this.addComment} action={`/post/${this.props.post.id}`}>
     <div className="form-group">

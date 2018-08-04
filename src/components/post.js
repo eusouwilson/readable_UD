@@ -7,8 +7,14 @@ import {connect} from "react-redux";
 import PostComment from "./addComment"
 import { bindActionCreators } from 'redux';
 class Post extends Component {
+    constructor() {
+        super();
+        this.state = {
+            StateRefresh: 0,
+        }
+    }
     deletePost = () => {
-        this.props.fetchDeletePost(this.props.post.id)
+        this.props.fetchDeletePost(this.props.post.id,{deleted:true})
     }
 
     render() {
@@ -53,7 +59,7 @@ class Post extends Component {
             </button> 
             </Link>
             <Link to={{
-                            pathname:'/',       
+                            pathname:'/posts',       
                             }}>
             <button type="button" className="btn btn-default" aria-label="Delete" onClick={this.deletePost}>
                 <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
@@ -71,7 +77,7 @@ class Post extends Component {
 }
 
 const mapStateToProps = state => ({
-        posts: state.post,
+        posts: state.posts,
         state: state  
 })
 

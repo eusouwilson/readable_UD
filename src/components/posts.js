@@ -4,6 +4,7 @@ import {connect} from "react-redux"
 import Post from './post'
 import Categories from './categories'
 import { bindActionCreators } from 'redux';
+import Error from './error';
 
 
 
@@ -18,8 +19,7 @@ class Posts extends Component {
     componentDidMount() {        
         this.props.fetchAllPosts();
     }
-    render() {
-        
+    render() { 
         return(
           <div className="container">
           <div>
@@ -39,9 +39,10 @@ class Posts extends Component {
           </div>
             <div className="row" >
                 <div className="col-md-8">
-                    {this.props.posts.map(post => (
+
+                    {this.props.posts.length ? this.props.posts.map(post => (
                         <Post key={post.id} post={post}  />
-                    ))}
+                    )): <Error/>}
                 </div>
                 <div className="col-md-4">
                 <Categories/>

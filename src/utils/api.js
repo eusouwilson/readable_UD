@@ -44,15 +44,15 @@ export const getCommentById = (id) =>
           .then(data => data)
   
 // delete a comment  
-export const deleteComment = (id) =>
+export const deleteComment = (id, bodyContent) =>
       fetch(`${api}/comments/${id}`, {
-          method: 'DELETE',
-          headers: {
-              ...headers,
-              'Content-Type': 'application/json'
-          },
-      }).then(res => res.json())
-          .then(data => data)      
+          method: 'PUT',
+            headers: {
+                ...headers,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bodyContent)
+       }).then(res => res.json())     
 
 // edit a comment          
 export const editComment = (id, bodyContent) =>
@@ -124,13 +124,13 @@ export const editPost = (id, bodyContent) =>
     }).then(res => res.json())
 
 //delete a certain post
-export const deletePost = (id) =>
+export const deletePost = (id, bodyContent) =>
     fetch(`${api}/posts/${id}`, {
-        method: 'DELETE',
+        method: 'PUT',
         headers: {
             ...headers,
             'Content-Type': 'application/json'
         },
+        body: JSON.stringify(bodyContent)
     }).then(res => res.json())
-        .then(data => data)
 

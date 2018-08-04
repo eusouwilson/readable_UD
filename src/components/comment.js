@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 
 class Comment extends Component {
     deleteComment = () => {
-        this.props.fetchDeleteComment(this.props.comment.id)
+        this.props.fetchDeleteComment(this.props.comment.id,{parentDeleted:true})
     }
     
     render() {

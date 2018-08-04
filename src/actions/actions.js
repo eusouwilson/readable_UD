@@ -29,10 +29,10 @@ export const fetchAllPosts = (sort) => dispatch => {
 
 // list a particular post
 export const GET_POST = 'GET_POST'
-export function getPost(post, comments) {
+export function getPost(posts, comments) {
     return {
         type: GET_POST,
-        post,
+        posts,
         comments
     }
 }
@@ -60,8 +60,13 @@ export function deleteComment(comment) {
         comment
     }
 }
-export const fetchDeleteComment = (id) => dispatch => {
-    postAPI.deleteComment(id).then((comment) => dispatch(deleteComment(comment)))
+export const fetchDeleteComment = (id, body) => dispatch => {
+    postAPI.deleteComment(id, body).then((comment) => {
+        dispatch(deleteComment(comment))
+        postAPI.getArticleById(comment.parentId).then((post) => {
+        postAPI.editPost(comment.parentId, {commentCount: post.commentCount-1})
+        })
+    })
 }
 
 // list all categories
@@ -194,6 +199,6 @@ export function deletePost(posts) {
         posts
     }
 }
-export const fetchDeletePost = (id) => dispatch => {
-    postAPI.deletePost(id).then((posts) => dispatch(deletePost(posts)))
+export const fetchDeletePost = (id, body) => dispatch => {
+    postAPI.deletePost(id, body).then((posts) => dispatch(deletePost(posts)))
 }

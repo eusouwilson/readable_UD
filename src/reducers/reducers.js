@@ -18,11 +18,11 @@ const initialPostState = {
     comments: [],
     comment: [],
     categories: [],
-    post: {},
 }
 
 function posts(state = initialPostState, action) {
     let temp;
+    let tempPost;
     switch (action.type) {
         case GET_POSTS:
             return {
@@ -31,17 +31,17 @@ function posts(state = initialPostState, action) {
             }
         case GET_POST:
             let error = ""
-            if(action.post.error || JSON.stringify(action.post)==='{}') {
-                error = true
+            if(action.posts.error || action.posts==='[]') {
+                error = true    
             }
             return {
                 ...state,
-                post: action.post,
+                posts: action.posts,
                 comments: state.comments,
                 error: error
             }
         case GET_POST_CATEGORY:
-            if(action.posts.error || JSON.stringify(action.posts)==='{}') {
+            if(action.posts.error || action.posts==='[]') {
                 error = true
             }
             return {
@@ -60,7 +60,7 @@ function posts(state = initialPostState, action) {
             return {
                 ...state,
                 posts: state.posts,
-                comments: action.comments
+                comments: action.comments.filter(comment => comment.parentDeleted === false)
             }
         case GET_COMMENT:
             return {
@@ -73,19 +73,20 @@ function posts(state = initialPostState, action) {
 
             }
         case DELETE_COMMENT:
-            for (var i = state.comments.length - 1; i >= 0; i--) {
-                if (state.comments[i].id === action.comment.id) {
-                    state.comments.splice(i, 1)
-                }
-            }
+            tempPost = {...state.posts}
+            temp = state.comments.filter(comment => comment.id !== action.comment.id)
+            tempPost.commentCount = tempPost.commentCount -1
             return {
-                ...state
+                ...state,
+                posts: tempPost,
+                comments: temp
             }
         case VOTE_POST:
-            temp = state.posts
-            if (temp.length) {
+            if (state.posts.length) {
+                temp = state.posts.slice()
                 temp.map((posts) => posts.id === action.posts.id ? posts.voteScore = action.posts.voteScore : "")
             }else{
+                temp = {...state.posts}
                 temp.voteScore = action.posts.voteScore 
             }
             return {
@@ -93,7 +94,7 @@ function posts(state = initialPostState, action) {
                 posts: temp
             }
         case VOTE_COMMENT:
-            temp = state.comments
+            temp = state.comments.slice()
             temp.map((comment) => comment.id === action.comment.id ?  comment.voteScore = action.comment.voteScore : "")
             return {
                 ...state,
@@ -101,14 +102,13 @@ function posts(state = initialPostState, action) {
 
             }
         case ADD_POST:
-            state.posts.push(action.posts)
-            console.log(...state)
+            temp = {...state.posts}
+            temp.push(action.posts)
             return {
                 ...state,
-                
             }            
         case EDIT_POST:
-            temp = Object.entries(state)[0][1]
+            temp = state.posts.slice()
             temp.map((post) => post.id === action.post.id ? post.voteScore = action.post.voteScore : "")
             
             return {
@@ -117,14 +117,12 @@ function posts(state = initialPostState, action) {
 
             }
         case DELETE_POST:
-            for (let i = state.posts.length - 1; i >= 0; i--) {
-                if (state.posts[i].id === action.posts.id) {
-                    state.posts.splice(i, 1)
-                }
-            }
+            state.posts.length?  temp = state.posts.slice().filter(post => post.id !== action.posts.id): temp =[]
+
             return {
-                ...state
-            }    
+                ...state,
+                posts: temp
+            }   
         default:
             return state
     }

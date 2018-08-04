@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import Comment from './comment' 
 import Categories from './categories'
 import Post from './post'
+import Error from './error';
+
 
 class PostDetail extends Component {
      componentDidMount() {
@@ -13,20 +15,20 @@ class PostDetail extends Component {
     render() {
         if (this.props.error) {
             return (
-                <div>error 404</div>
+                <Error/>
             )
         } else
         return(
             <div className="container">
                 <div className="row">
                 <div className="col-md-8">
-                <Post key={this.props.post.id} post={this.props.post}  />
+                <Post key={this.props.posts.id} post={this.props.posts}  />
                 </div>
                 <div className="col-md-4">
                 <Categories/>
                 </div>
                 </div>
-                {this.props.post.commentCount > 0 && 
+                {this.props.posts.commentCount > 0 && 
                    <div className="row">
                     <div className="col-md-10">
                    <div className="comment-body comment-body-info">
@@ -46,7 +48,7 @@ class PostDetail extends Component {
 }
 
 const mapStateToProps = state => ({
-    post: state.post,
+    posts: state.posts,
     state: state,
     comments: state.comments,
     error: state.error

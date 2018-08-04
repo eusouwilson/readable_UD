@@ -4,6 +4,7 @@ import ReactDOM from "react-dom"
 import {getUid} from "../utils/utils"
 import {connect} from "react-redux";
 import { bindActionCreators } from 'redux';
+import Error from './error';
 
 class AddPost  extends Component {
 
@@ -29,6 +30,11 @@ class AddPost  extends Component {
 
     }
     render() {
+        if (this.props.error) {
+            return (
+                <Error/>
+            )
+        } else
         return(
             <form className="col-md-6 form-horizontal"  onSubmit={this.addPost} action="/">
             <fieldset>
