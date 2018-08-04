@@ -84,8 +84,6 @@ function posts(state = initialPostState, action) {
                     commentCount: post.commentCount -1
                 } : post
             )
-            console.log(updatePost)
-
             temp = state.comments.filter(comment => comment.id !== action.comment.id)
             return {
                 ...state,
